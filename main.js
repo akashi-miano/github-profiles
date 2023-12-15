@@ -2,6 +2,7 @@ const apiUrl = "https://api.github.com/users/";
 const cardContainer = document.querySelector(".card-container");
 const form = document.querySelector(".form");
 const userInput = document.querySelector("input");
+const atUser = document.querySelector(".atUser");
 const avatar = document.querySelector(".img-wrapper img");
 const userName = document.querySelector(".user-name");
 const checkProfile = document.querySelector(".check-profile");
@@ -10,13 +11,14 @@ const followers = document.querySelector(".followers-count");
 const following = document.querySelector(".following-count");
 const repos = document.querySelector(".repos-count");
 
-const updateDetails = (a, u, b, f, r, followingCount) => {
+const updateDetails = (a, u, b, f, r, followingCount, au) => {
   avatar.src = a;
   userName.innerHTML = u;
   bio.innerHTML = b;
   followers.innerHTML = f;
   following.innerHTML = followingCount;
   repos.innerHTML = r;
+  atUser.innerHTML = `@${au}`;
 };
 
 const fetchURL = async () => {
@@ -31,7 +33,8 @@ const fetchURL = async () => {
       data.bio,
       data.followers,
       data.public_repos,
-      data.following
+      data.following,
+      data.name
     );
     checkProfile.setAttribute("href", data.html_url);
     if (data.message === "Not Found") {
