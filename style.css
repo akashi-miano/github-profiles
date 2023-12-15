@@ -95,6 +95,9 @@ input{
     padding: 5px;
 }
 
+.card-container{
+    display: none;
+}
 .card{
     border-radius: 5px;
     position: relative;

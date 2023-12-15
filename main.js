@@ -1,4 +1,5 @@
 const apiUrl = "https://api.github.com/users/";
+const cardContainer = document.querySelector(".card-container");
 const form = document.querySelector(".form");
 const userInput = document.querySelector("input");
 const avatar = document.querySelector(".img-wrapper img");
@@ -22,6 +23,8 @@ const fetchURL = async () => {
   try {
     const res = await fetch(`${apiUrl}${userInput.value}`);
     const data = await res.json();
+
+    console.log(data);
     updateDetails(
       data.avatar_url,
       data.login,
@@ -31,7 +34,11 @@ const fetchURL = async () => {
       data.following
     );
     checkProfile.setAttribute("href", data.html_url);
-    console.log(data);
+    if (data.message === "Not Found") {
+      cardContainer.style = "display: none";
+    } else {
+      cardContainer.style = "display: block";
+    }
   } catch (error) {
     console.log(error);
   }
